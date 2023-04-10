@@ -49,9 +49,11 @@ useEffect(()=>{
 CI/CD 환경을 구축하기 위해서는 프로젝트가 잘 패키지화 될 수 있도록 해주어야한다. 
 
 
-
+### 5. 서버에 배포하기
 
 
 출처
 - https://7942yongdae.tistory.com/136  
-- https://velog.io/@kcdoggo/%EC%8A%A4%ED%94%84%EB%A7%81%EB%A6%AC%EC%95%A1%ED%8A%B8-%EC%97%B0%EB%8F%99
+- https://velog.io/@kcdoggo/%EC%8A%A4%ED%94%84%EB%A7%81%EB%A6%AC%EC%95%A1%ED%8A%B8-%EC%97%B0%EB%8F%99 
+- https://trace90.tistory.com/entry/SpringBoot-React-%ED%80%B5%EC%8A%A4%ED%83%80%ED%8A%B8-Gradle
+- https://deeplify.dev/back-end/spring/executable-jar
