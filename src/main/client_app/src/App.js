@@ -1,7 +1,21 @@
 import logo from './logo.svg';
 import './App.css';
+import {useEffect, useState} from 'react';
 
 function App() {
+  const [message, setMessage] = useState([]);
+
+  useEffect(()=>{
+    fetch("/api/hello")
+      .then((response) => {
+        console.log(response.json())
+        return;
+      })
+      .then(function (data) {
+        setMessage(data);
+      });
+  }, []);
+
   return (
     <div className="App">
       <header className="App-header">

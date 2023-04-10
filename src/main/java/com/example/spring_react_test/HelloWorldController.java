@@ -9,7 +9,7 @@ import java.util.List;
 @RestController
 public class HelloWorldController {
     
-    @GetMapping("hello")
+    @GetMapping("api/hello")
     public List<String> hello() {
         return Arrays.asList("안녕하세요","Hello");
     }
