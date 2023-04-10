@@ -31,7 +31,19 @@ module.exports = function(app) {
 ```
 
 Proxy Server설정을 완료했다면 이제 React에서 아래와 같이 경로 설정 후 호출하면 개발 환경에서는 Proxy Server로 호출하고 빌드 후 배포한 운영 환경에서는 동일한 주소이기에 Path로 바로 접근한다.
+```javascript
+useEffect(()=>{
+    fetch("/api/hello")
+      .then((response) => {
+        console.log(response.json())
+        return;
+      })
+      .then(function (data) {
+        setMessage(data);
+      });
+  }, []);
 
+```
 
 
 

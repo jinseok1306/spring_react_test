@@ -6,7 +6,7 @@ function App() {
   const [message, setMessage] = useState([]);
 
   useEffect(()=>{
-    fetch("/api/hello")
+    fetch("api/hello")
       .then((response) => {
         console.log(response.json())
         return;
