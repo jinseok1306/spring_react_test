@@ -48,7 +48,7 @@ useEffect(()=>{
 ### 4. Gradle을 이용해서 프로젝트 빌드하기  
 CI/CD 환경을 구축하기 위해서는 프로젝트가 잘 패키지화 될 수 있도록 해주어야한다. 
 
-먼저 Spring 프로젝트 폴더에 있는 build.gradle 파일에 아래 소스를 추가한다.
+먼저 Spring 프로젝트 폴더에 있는 build.gradle 파일에 아래 소스를 추가한다. 
 ```gradle
 //React Project를 빌드 시 추가하기위해 설정
 def frontendDir = "$projectDir/src/main/client_app"
@@ -97,7 +97,9 @@ tasks.bootJar {
     dependsOn "copyReactBuildFiles"
 }
 ```  
-저장 후 프로젝트 경로에서 `./gradlew build` 명령어를 실행하여 Build를 진행한다. 만약 이때 `ERR_OSSL_EVP_UNSUPPORTED` 오류가 발생할 경우 React 프로젝트에 package.json 파일에 react-scripts 버전이 최신버전이 아니여서 Open SSL3 버전 규격에 어긋나 발생하는 오류이다. react-scrips 버전을 최신버전으로 변경 후 설치하면 오류가 해결된다.  
+위 내용을 간단히 정리하면 Spring Boot 프로젝트가 build될 때 React 프로젝트를 먼저 build하고 결과물을 Spring Boot 프로젝트 build 결과물에 포함시킨다는 스크립트이다. 처리 순서는 processResources를 기점으로 installReact->buildReact->copyReactBuildFiles 순으로 실행된다. 
+
+이제 build.gradle 파일 저장 후 프로젝트 경로에서 `./gradlew build` 명령어를 실행하여 Build를 진행한다. 만약 이때 `ERR_OSSL_EVP_UNSUPPORTED` 오류가 발생할 경우 React 프로젝트에 package.json 파일에 react-scripts 버전이 최신버전이 아니여서 Open SSL3 버전 규격에 어긋나 발생하는 오류이다. react-scrips 버전을 최신버전으로 변경 후 설치하면 오류가 해결된다.  
 
 ### 5. 서버에 배포하기  
 Build된 파일은 프로젝트 build/lib 경로에 있으며 .jar 확장자로 저장된다. 프로젝트를 실행하려면 cli 환경에서 해당 경로로 이동 후 `java -jar [name-of-jar-file].jar`로 입력하면 프로젝트를 실행할 수 있고 localhost:8080으로 접속하면 React 화면이 나온다. 
