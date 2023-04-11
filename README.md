@@ -48,8 +48,62 @@ useEffect(()=>{
 ### 4. Gradle을 이용해서 프로젝트 빌드하기  
 CI/CD 환경을 구축하기 위해서는 프로젝트가 잘 패키지화 될 수 있도록 해주어야한다. 
 
+먼저 Spring 프로젝트 폴더에 있는 build.gradle 파일에 아래 소스를 추가한다.
+```gradle
+//React Project를 빌드 시 추가하기위해 설정
+def frontendDir = "$projectDir/src/main/client_app"
 
-### 5. 서버에 배포하기
+sourceSets {
+    main {
+        resources {
+            srcDirs = ["$projectDir/src/main/resources"]
+        }
+    }
+}
+
+task installReact(type: Exec) {
+    workingDir "$frontendDir"
+    inputs.dir "$frontendDir"
+    group = BasePlugin.BUILD_GROUP
+    if (System.getProperty('os.name').toLowerCase(Locale.ROOT).contains('windows')) {
+        commandLine "npm.cmd", "audit", "fix"
+        commandLine 'npm.cmd', 'install'
+    } else {
+        commandLine "npm", "audit", "fix"
+        commandLine 'npm', 'install'
+    }
+}
+
+task buildReact(type: Exec) {
+    dependsOn "installReact"
+    workingDir "$frontendDir"
+    inputs.dir "$frontendDir"
+    group = BasePlugin.BUILD_GROUP
+    if (System.getProperty('os.name').toLowerCase(Locale.ROOT).contains('windows')) {
+        commandLine "npm.cmd", "run-script", "build"
+    } else {
+        commandLine "npm", "run-script", "build"
+    }
+}
+
+task copyReactBuildFiles(type: Copy) {
+    dependsOn "buildReact"
+    from "$frontendDir/build"
+    into "$buildDir/resources/main/static"
+}
+
+//배포시에만 빌드파일 포함
+tasks.bootJar {
+    dependsOn "copyReactBuildFiles"
+}
+```  
+저장 후 프로젝트 경로에서 `./gradlew build` 명령어를 실행하여 Build를 진행한다. 만약 이때 `ERR_OSSL_EVP_UNSUPPORTED` 오류가 발생할 경우 React 프로젝트에 package.json 파일에 react-scripts 버전이 최신버전이 아니여서 Open SSL3 버전 규격에 어긋나 발생하는 오류이다. react-scrips 버전을 최신버전으로 변경 후 설치하면 오류가 해결된다.  
+
+### 5. 서버에 배포하기  
+Build된 파일은 프로젝트 build/lib 경로에 있으며 .jar 확장자로 저장된다. 프로젝트를 실행하려면 cli 환경에서 해당 경로로 이동 후 `java -jar [name-of-jar-file].jar`로 입력하면 프로젝트를 실행할 수 있고 localhost:8080으로 접속하면 React 화면이 나온다. 
+
+실제 서버에 배포할 때는 해당 서버에 JDK를 설치하고 jar을 실행한 다음에 백그라운드로 jar을 `nohup java –jar [name-of-jar-file].jar &
+` 명령어로 배포하면 된다. 이후 Tomcat으로 컴파일 경로를 설정하고 DNS 서버에서 IP와 호스트명을 일치시키면 웹 퍼블리싱 작업이 완료된다.  
 
 
 출처
