@@ -8,11 +8,11 @@
 
 ### 2. React 프로젝트 생성하기 
 - `npx create-react-app 프로젝트명` 프로젝트 생성 
-- `npm run`으로 프로젝트 실행
+- `npm start`으로 프로젝트 실행
 <img src="./scan/react page.png"  width="800" >  
 
 ### 3. Proxy Server 설정하기  
-로컬 환경에서 개발할 경우 React(Front-End)와 Spring(Back-End)을 각각 실행 후 통신해야된다. 그런데 두 프로젝트의 url이 다르기 떄문에 React 쪽에서 통신할 때 CORS문제가 발생해 통신할 수 없다. 그렇기에 개발 시에는 Proxy Server를 설정하여 CORS를 방지하는 것이다.   <a href="https://create-react-app.dev/docs/proxying-api-requests-in-development/">공식문서</a>에 Proxy Server를 설정하는 방법을 참고하여 아래와 같이 설정한다.  
+로컬 환경에서 개발할 경우 React(Front-End)와 Spring(Back-End)을 각각 실행 후 통신해야된다. 그런데 두 프로젝트의 url이 다르기 떄문에 React 쪽에서 통신할 kv때 CORS문제가 발생해 통신할 수 없다. 그렇기에 개발 시에는 Proxy Server를 설정하여 CORS를 방지하는 것이다.   <a href="https://create-react-app.dev/docs/proxying-api-requests-in-development/">공식문서</a>에 Proxy Server를 설정하는 방법을 참고하여 아래와 같이 설정한다.  
 
 - `npm install http-proxy-middleware --save ` 명령어로 라이브러리 설치
 - src 경로에 setupProxy.js 파일 생성 후 아래와 같이 소스 작성  
