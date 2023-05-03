@@ -277,6 +277,12 @@ dependencies {
 SpringBoot 프로젝트를 실행하고 <a href = "localhost:8080/swagger-ui.html">localhost:8080/swagger-ui.html</a> 경로로 접속하면 Swagger 화면을 볼 수 있다.  
 <img src="./scan/swagger.png"  width="800" >  
 
+### 8. SpringBoot 단위 테스트 적용하기  
+Controller에서 작성된 Function의 동작 여부를 매번 Swagger에서 확인하기에는 프로젝트 규모가 커짐에 따라 한계가 있다. 그렇기에 junit test를 사용하여 단위테스트를 진행한다.
+- 좌측 상태차에서 마우스 우클릭 후 Testing 체크 (그러면 플라스크 모양 아이콘 추가됨)
+- Testing 아이콘 클릭하면 해당 함수를 테스트할 수 있다.
+- 테스트 세팅 방법은 <a href="https://spring.io/guides/gs/testing-web/">공식 사이트</a>를 참고하도록 한다.
+
  
 출처
 - https://7942yongdae.tistory.com/136  
@@ -287,4 +293,5 @@ SpringBoot 프로젝트를 실행하고 <a href = "localhost:8080/swagger-ui.htm
 - https://shallow-learning.tistory.com/entry/%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B8-8-Spring-Boot-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4MSSQL-%EC%97%B0%EA%B2%B0-1%ED%83%84
 - https://devlog-wjdrbs96.tistory.com/200
 - https://dalpaeng00.tistory.com/83
-- https://m.blog.naver.com/qhdqhdekd261/221754178731
+- https://spring.io/guides/gs/testing-web/
+- https://codecrafting.tistory.com/2
